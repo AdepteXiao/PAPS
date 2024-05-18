@@ -1,0 +1,61 @@
+digraph "src" {
+
+splines  = ortho;
+fontname = "Inconsolata";
+
+node [colorscheme = ylgnbu4];
+edge [colorscheme = dark28, dir = both];
+
+AdminDao         [shape = record, pos = "7.901,5.479!"     , label = "{ AdminDao | + AdminDao(EntityRepository) : \l|+ save(String) : void\l + delete(String) : void\l + getById(int) : String\l }"];
+AdminDaoCreator  [shape = record, pos = "7.444,1.735!"     , label = "{ AdminDaoCreator | + AdminDaoCreator() : \l|+ createDao() : Dao\l }"];
+AdminRepository  [shape = record, pos = "-1.982,3.255!"    , label = "{ AdminRepository | + AdminRepository() : \l|+ findById(int) : String\l + save(String) : void\l + delete(String) : void\l }"];
+AdminSpa         [shape = record, pos = "10.618,-0.402!"   , label = "{ AdminSpa | + AdminSpa(Dao) : \l|+ present() : void\l }"];
+Command          [shape = record, pos = "14.244,8.701!"    , label = "{ \<\<interface\>\>\nCommand | + execute() : void\l }"];
+Dao              [shape = record, pos = "12.023,5.313!"    , label = "{ \<\<interface\>\>\nDao | + delete(String) : void\l + getById(int) : String\l + save(String) : void\l }"];
+DaoCreator       [shape = record, pos = "6.089,3.255!"     , label = "{ \<\<interface\>\>\nDaoCreator | + createDao() : Dao\l }"];
+DeleteCommand    [shape = record, pos = "8.486,10.340!"    , label = "{ DeleteCommand | + DeleteCommand(EntityRepository, String) : \l|+ execute() : void\l }"];
+EntityRepository [shape = record, pos = "-0.465,7.595!"    , label = "{ \<\<interface\>\>\nEntityRepository | + delete(String) : void\l + findById(int) : String\l + save(String) : void\l }"];
+GetByIdCommand   [shape = record, pos = "8.639,8.867!"     , label = "{ GetByIdCommand | + GetByIdCommand(EntityRepository, int) : \l|+ execute() : void\l }"];
+Main             [shape = record, pos = "5.999,-2.412!"    , label = "{ Main | + Main() : \l|+ main(String[]) : void\l }"];
+Repository       [shape = record, pos = "-0.437,5.268!"    , label = "{ Repository | + Repository() : \l|+ save(String) : void\l + findById(int) : String\l + delete(String) : void\l }"];
+SaveCommand      [shape = record, pos = "8.486,11.990!"    , label = "{ SaveCommand | + SaveCommand(EntityRepository, String) : \l|+ execute() : void\l }"];
+SpaProvider      [shape = record, pos = "5.589,-0.583!"    , label = "{ SpaProvider | + SpaProvider() : \l|+ presentUserSpa() : UserSPA\l + presentAdminSpa() : AdminSpa\l }"];
+UserDao          [shape = record, pos = "3.947,5.560!"     , label = "{ UserDao | + UserDao(EntityRepository) : \l|+ delete(String) : void\l + getById(int) : String\l + save(String) : void\l }"];
+UserDaoCreator   [shape = record, pos = "4.477,1.735!"     , label = "{ UserDaoCreator | + UserDaoCreator() : \l|+ createDao() : Dao\l }"];
+UserRepository   [shape = record, pos = "0.934,3.255!"     , label = "{ UserRepository | + UserRepository() : \l|+ findById(int) : String\l + save(String) : void\l + delete(String) : void\l }"];
+UserSPA          [shape = record, pos = "10.701,-1.620!"   , label = "{ UserSPA | + UserSPA(Dao) : \l|+ present() : void\l }"];
+
+AdminDao         -> Dao              [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+AdminDao         -> DeleteCommand    [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+AdminDao         -> EntityRepository [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "repository\n1"];
+AdminDao         -> GetByIdCommand   [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+AdminDao         -> SaveCommand      [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+AdminDaoCreator  -> AdminDao         [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+AdminDaoCreator  -> AdminRepository  [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+AdminDaoCreator  -> DaoCreator       [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+AdminRepository  -> Repository       [color = "#000082", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+AdminSpa         -> Dao              [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "dao\n1"];
+DeleteCommand    -> Command          [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+DeleteCommand    -> EntityRepository [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "repository\n1"];
+GetByIdCommand   -> Command          [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+GetByIdCommand   -> EntityRepository [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "repository\n1"];
+Main             -> SpaProvider      [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+Repository       -> EntityRepository [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+SaveCommand      -> Command          [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+SaveCommand      -> EntityRepository [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "repository\n1"];
+SpaProvider      -> AdminDaoCreator  [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+SpaProvider      -> AdminSpa         [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+SpaProvider      -> UserDaoCreator   [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+SpaProvider      -> UserSPA          [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserDao          -> Dao              [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+UserDao          -> DeleteCommand    [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserDao          -> EntityRepository [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "repository\n1"];
+UserDao          -> GetByIdCommand   [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserDao          -> SaveCommand      [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserDaoCreator   -> DaoCreator       [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+UserDaoCreator   -> UserDao          [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserDaoCreator   -> UserRepository   [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "«create»", headlabel = ""];
+UserRepository   -> Repository       [color = "#000082", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+UserSPA          -> Dao              [color = "#595959", style = solid , arrowtail = diamond , arrowhead = vee     , taillabel = "1", label = "", headlabel = "dao\n1"];
+
+}
